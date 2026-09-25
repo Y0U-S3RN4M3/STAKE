@@ -24,7 +24,7 @@ function loadStats(){
 
 const colNum = 20;
 const rowNum = 15;
-const boxSize = 25;
+const boxSize = 27;
 const headColour = 'rgb(0, 75, 0)';
 const tailColour = 'rgb(0, 150, 0)';
 const enemyColour = 'rgb(255, 0, 0)';
@@ -88,14 +88,16 @@ function runWave(waveNum){
             `repeat(${rowNum}, ${boxSize}px)`;
 
         document.getElementById("grid").style.marginTop = 
-    `${((window.innerHeight - (rowNum * (boxSize + 5))) / 2) - 30}px`;
+    `${((window.innerHeight - (rowNum * (boxSize + 5))) / 4) - 30}px`;
 
         document.getElementById("grid").style.gridAutoColumns = `${boxSize}px`
         
         document.querySelectorAll(".box").forEach(e => {
-            e.style.height = `${boxSize}`;
-            e.style.width = `${boxSize}`
+            e.style.height = `${boxSize}px`;
+            e.style.width = `${boxSize}px`;
+            e.style.borderRadius = `${boxSize / 15}px`;
         });
+        document.getElementById("grid").style.gap = `${boxSize / 4.5}px`
 
         document.getElementById("speed").textContent = `SPEED: ${(1000/snakeIntSpeed).toFixed(2)}CBS/S`;
         document.getElementById("enemySpeed").textContent = `ENEMY SPEED: ${(1000/enemyIntSpeed).toFixed(2)}CBS/S`;
