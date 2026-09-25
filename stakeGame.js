@@ -73,7 +73,7 @@ function runWave(waveNum){
         const enemyStrength = waveNum;
         const snakeHeadStrength = stats.headStrengthLVL;
         const snakeTailStrength = stats.tailStrengthLVL;
-        const enemyIntSpeed = 350 - (waveNum * 10);
+        const enemyIntSpeed = 340 - (waveNum * 10);
         const snakeIntSpeed = 255 - ((stats.speedLVL - 1) * 10);
 
         const speedMultiplier =
