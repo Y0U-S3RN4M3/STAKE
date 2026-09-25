@@ -1,16 +1,26 @@
 const speedUpgradeButton = document.getElementById("speedUpgradeButton"); 
-const speedUpgradeButtonMax = document.getElementById("speedUpgradeButtonMax"); 
+const speedUpgradeButtonMax = document.getElementById("speedUpgradeButtonMax");
+
 const headStrengthUpgradeButton = document.getElementById("headStrengthUpgradeButton"); 
 const headStrengthUpgradeButtonMax = document.getElementById("headStrengthUpgradeButtonMax"); 
+
 const tailStrengthUpgradeButton = document.getElementById("tailStrengthUpgradeButton"); 
 const tailStrengthUpgradeButtonMax = document.getElementById("tailStrengthUpgradeButtonMax"); 
+
 const waveSkippingUpgradeButton = document.getElementById("waveSkippingUpgradeButton"); 
 const waveSkippingUpgradeButtonMax = document.getElementById("waveSkippingUpgradeButtonMax"); 
+
 const buySpeed = document.getElementById("buySpeed"); 
 const buyHeadStrength = document.getElementById("buyHeadStrength"); 
 const buyTailStrength = document.getElementById("buyTailStrength"); 
-const buyWaveSkip = document.getElementById("buyWaveSkip"); 
-const pointLabel = document.getElementById("points"); 
+const buyWaveSkip = document.getElementById("buyWaveSkip");
+
+const speedAmountDisplay = document.getElementById("speedAmount");
+const headStrengthAmountDisplay = document.getElementById("headStrengthAmount");
+const tailStrengthDisplay = document.getElementById("tailStrengthAmount");
+const waveSkippingDisplay = document.getElementById("waveSkippingAmount");
+
+const pointLabel = document.getElementById("points");
 
 const normalButtons = [ 
     speedUpgradeButton, 
@@ -152,8 +162,6 @@ function findPrice(element){
                 : 5 ** ((stats.waveSkippingLVL * 2) + 2)); 
     } 
 } 
-
-console.log(findPrice(tailStrengthUpgradeButton)) 
 
 function findIfMax(element){ 
     switch(element){ 
@@ -366,7 +374,12 @@ function updateUI(){
     buySpeed.textContent = `Speed: ${convertLVLtoDescription('speed', stats.speedLVL)} (LVL ${stats.speedLVL})`; 
     buyHeadStrength.textContent = `Head Strength: ${convertLVLtoDescription('headStrength', stats.headStrengthLVL)} (LVL ${stats.headStrengthLVL})`; 
     buyTailStrength.textContent = `Tail Strength: ${convertLVLtoDescription('tailStrength', stats.tailStrengthLVL)} (LVL ${stats.tailStrengthLVL})`; 
-    buyWaveSkip.textContent = `Knowledge: ${convertLVLtoDescription('waveSkipping', stats.waveSkippingLVL)} (LVL ${stats.waveSkippingLVL})`; 
+    buyWaveSkip.textContent = `Knowledge: ${convertLVLtoDescription('waveSkipping', stats.waveSkippingLVL)} (LVL ${stats.waveSkippingLVL})`;
+
+    speedAmountDisplay.textContent = `${findPrice(speedUpgradeButton)} Boxes`
+    headStrengthAmountDisplay.textContent = `${findPrice(headStrengthUpgradeButton)} Boxes`
+    tailStrengthDisplay.textContent = `${findPrice(tailStrengthUpgradeButton)} Boxes`
+    waveSkippingDisplay.textContent = `${findPrice(waveSkippingUpgradeButton)} Boxes`
 } 
  
 function init(){ 
