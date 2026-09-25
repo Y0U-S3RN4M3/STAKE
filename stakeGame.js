@@ -517,7 +517,7 @@ async function runGame(){
 async function run(){
     loadStats();
     await runGame();
-    window.location.href = 'homeScreen.html';
+    window.location.href = 'index.html';
 }
 
 run();
