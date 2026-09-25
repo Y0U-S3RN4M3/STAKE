@@ -25,6 +25,9 @@ function loadStats(){
 const colNum = 20;
 const rowNum = 15;
 const boxSize = 25;
+const headColour = 'rgb(0, 75, 0)';
+const tailColour = 'rgb(0, 150, 0)';
+const enemyColour = 'rgb(255, 0, 0)';
 
 function runWave(waveNum){
     return new Promise(resolve => {
@@ -336,7 +339,7 @@ function runWave(waveNum){
             // Draw enemy
             getBoxElement(
                 `box${getBoxNum(enemyX, enemyY)}`
-            ).style.backgroundColor = 'red';
+            ).style.backgroundColor = enemyColour;
             document.getElementById(
                 `enemyStrength`
             ).textContent = `ENEMY STRENGTH: ${enemyStrength}`;
@@ -453,8 +456,8 @@ function runWave(waveNum){
                 getBoxElement(`box${e}`)
                     .style.backgroundColor =
                     i === 0
-                        ? 'rgb(0, 45, 0)'
-                        : 'green';
+                        ? headColour
+                        : tailColour;
 
             });
 
