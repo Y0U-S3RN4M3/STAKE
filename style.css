@@ -1,0 +1,492 @@
+*{
+    background-color: black;
+    color: white;
+    font-family: "Courier New", monospace
+}
+body::selection{
+    background-color: grey;
+    color: rgb(26, 26, 26);
+}
+#grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 25px;
+    gap: 7px;
+    border: 2px solid red;
+    justify-self: center;
+    padding: 5px;
+    border-radius: 4px;
+}
+.box{
+    background-color: rgb(46, 46, 46);
+    color: black;
+    margin: 0;
+    border-radius: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: rgba(14, 0, 0, 0.9);
+    border: 2px solid rgb(58, 0, 0);
+
+    width: 350px;
+    min-height: 123px;
+
+    border-radius: 10px;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2em;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.screen p {
+    padding: 0;
+    margin: 0;
+    color: rgb(128, 0, 0);
+    background-color: transparent;
+    text-align: center;
+}
+.screenWin {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: rgba(0, 14, 0, 0.9);
+    border: 2px solid rgb(0, 58, 0);
+
+    width: 350px;
+    min-height: 123px;
+
+    border-radius: 10px;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2em;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.screenWin p {
+    padding: 0;
+    margin: 0;
+    color: rgb(0, 128, 0);
+    background-color: transparent;
+    text-align: center;
+}
+
+#stats{
+    display: grid;
+    grid-template-columns: repeat(2, 50vw);
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    padding-top: 50px;
+}
+
+#health, #headStrength, #tailStrength, #enemyStrength, #length, #speed, #enemySpeed{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+}
+
+#countdown {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    font-size: 100px;
+    font-weight: bold;
+
+    background-color: transparent;
+}
+
+#countdown p {
+    margin: 0;
+    background-color: transparent;
+}
+
+#headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 0;
+
+    padding-top: 50px;
+    padding-bottom: 5px;
+    padding-right: 80px;
+    margin-bottom: 0;
+
+    font-size: 3em;
+
+}
+
+#headerContainer span {
+    display: inline-block;
+    width: 75px;
+    height: 95px;
+    padding: 0;
+    margin: 0;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    font-size: 0;
+}
+#headerContainer span img{
+    height: 95px;
+}
+#headerContainer span img.selected {
+    filter: grayscale(100%);
+}
+
+#logoS::selection {
+    background-color: grey;
+    color: rgb(26, 26, 26);
+}
+
+#headerContainer h1 {
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: 1;
+
+}
+
+#subheading{
+    display: flex;
+    justify-content: right;
+    padding-right: 40px
+}
+
+#buttonDivContainer{
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.buttonDiv{
+    width: 33vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    height: 71.5vh;
+    padding: 0;
+    margin: 0;
+    border-right: 2px solid grey;
+    font-weight: normal;
+    transition: box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+
+}
+#tutorialDiv{
+    border: none;
+}
+
+.buttonDiv:hover{
+    background-color: rgba(10, 10, 10, 0.4);
+    background-blend-mode: multiply;
+    background-size: cover;
+    font-weight: bolder;
+
+    transition: all 0.5s;
+}
+
+#playDiv:hover{
+    background-image: url('./images/playButtonDiv.png');
+    background-position: right;
+}
+#upgradeDiv {
+    background-image: url('./images/upgradeButtonDiv.jpg');
+    background-size: 500px;
+    background-position: 1000px center;
+    background-repeat: no-repeat;
+    transition: all 0.2s ease;
+}
+
+#upgradeDiv:hover {
+    background-position: center;
+    color: black;
+}
+
+.buttonDiv::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+
+    background: rgba(255, 255, 255, 0.37);
+
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+.buttonDiv:hover::after {
+    animation: shine 0.6s ease forwards;
+}
+
+@keyframes shine {
+    from {
+        left: -100%;
+    }
+    to {
+        left: 150%;
+    }
+}
+
+#upgradeHeader{
+    padding: 15px;
+    font-size: 4em;
+    text-align: center;
+}
+
+#back{
+    height: 40px;
+    width: 40px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    font-size: 2em;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    overflow: hidden;
+}
+
+#back::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+
+    background: rgb(255, 255, 255);
+
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+#back:hover::after {
+    animation: shine 0.6s ease forwards;
+}
+#points{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.25em;
+}
+#boxCenterer{
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#upgradeBox {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 20px;
+    width: 90%;
+    max-width: 1400px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+    #upgradeBox {
+        grid-template-columns: 1fr;
+    }
+}
+#speedUpgrade, #headStrengthUpgrade, #tailStrengthUpgrade, #waveSkippingUpgrade{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid white;
+    padding: 15px;
+}
+
+#upgradeBox label{
+    font-size: 1.125em;
+}
+button { 
+    background-color: rgb(21, 21, 21);
+    border-radius: 2px; 
+    overflow: hidden; 
+    padding: 15px; 
+    margin: 5px;
+    font-size: 1.1em;
+    border: grey;
+
+    position: relative;
+    transition: all 0.2s;
+} 
+
+button:hover{
+    background-color: rgb(54, 54, 54);
+}
+
+button::after { 
+    content: ""; 
+    position: absolute; 
+    top: 0; 
+    left: -100%; 
+    width: 50%; 
+    height: 100%; 
+    background: rgb(255, 255, 255); 
+    transform: skewX(-20deg); 
+    pointer-events: none; 
+} 
+
+button:hover::after { 
+    animation: shine 0.6s ease forwards; 
+}
+
+#alertDiv{
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+
+    width: fit-content;
+    z-index: 9999;
+    pointer-events: none;
+}
+.alert{
+    color: white;
+    background-color: rgba(36, 36, 36, 0.544);
+    max-width: 500px;
+    min-width: 250px;
+    border: 2px solid rgb(16, 16, 16);
+    border-right-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 5px;
+    z-index: 9999999;
+}
+
+#confirmOverlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999999;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+}
+.confirm {
+    position: fixed;
+    max-height: 90vh;
+    top: 35%;
+    overflow: hidden;
+
+    color: white;
+    background-color: rgba(11, 11, 11, 0.9);
+    border: 2px solid rgb(110, 110, 110);
+    padding: 15px;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+
+    z-index: 9999999999;
+    overflow-y: auto;
+}
+.confirm div{
+    background-color: rgba(11, 11, 11, 0.9);
+
+    padding: 15px;
+    padding-bottom: 0;
+    white-space: pre-line;
+}
+.confirm button{
+    margin: 20px;
+}
+.allowanddeny{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0px;
+}
+.allowBtn{
+    background-color: rgb(0, 75, 0);
+    font-size: 1em;
+    max-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.allowBtn:hover{
+    background-color: rgb(0, 150, 0);
+}
+.denyBtn{
+    background-color: rgb(75, 0, 0);
+    font-size: 1em;
+    max-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.denyBtn:hover{
+    background-color: rgb(150, 0, 0);
+}
+
+.header{
+    font-size: 3.5em;
+    text-align: center;
+    padding-top: 25px;
+}
+#tutorialDiv2{
+    background-color: rgb(50, 50, 50);
+    padding: 15px;
+    width: 75vw;
+    display: flex;
+    justify-self: center;
+    border-radius: 15px;
+    justify-content: center;
+    font-size: 1.25em;
+    flex-direction: column;
+}
+#tutorialDiv2 p{
+    background-color: rgb(50, 50, 50);
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+}
+#bold{
+    font-weight: bold;
+    font-size: 1.125em;
+}
