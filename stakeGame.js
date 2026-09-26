@@ -488,7 +488,7 @@ async function runGame(){
 
     let points = 0;
     let stillIn = true;
-    let wave = ((stats.waveSkippingLVL - 1) * 5)+1;
+    let wave = ((stats.waveSkippingLVL - 1) * 3)+1;
 
     while(stillIn){
 
