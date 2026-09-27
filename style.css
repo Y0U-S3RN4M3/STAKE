@@ -322,7 +322,7 @@ body::selection{
         grid-template-columns: 1fr;
     }
 }
-#speedUpgrade, #headStrengthUpgrade, #tailStrengthUpgrade, #waveSkippingUpgrade{
+#speedUpgrade, #headStrengthUpgrade, #tailStrengthUpgrade, #waveSkippingUpgrade, #healthUpgrade{
     display: flex;
     align-items: center;
     justify-content: space-between;

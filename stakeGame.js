@@ -7,7 +7,8 @@ let stats = savedStats
         speedLVL: 1,
         headStrengthLVL: 1,
         tailStrengthLVL: 1,
-        waveSkippingLVL: 1
+        waveSkippingLVL: 1,
+        healthLVL: 1,
     };
 
 function saveStats(){
@@ -81,7 +82,7 @@ function runWave(waveNum){
 
         const speedMultiplier =
             1 + ((stats.waveSkippingLVL - 1) / 4);
-        let snakeHealth = 20;
+        
         let enemyMoveAxis = 0;
 
         document.getElementById("grid").style.gridTemplateRows =
@@ -136,7 +137,7 @@ function runWave(waveNum){
             document.getElementById('health').textContent = `HEALTH: ${snakeHealth}`;
             document.getElementById("length").textContent = `LENGTH: ${snakeLength}`;
         }
-        
+        let snakeHealth = 10 + (10 * stats.healthLVL);
         function clearGrid(){
             const boxList = document.querySelectorAll('.box');
             boxList.forEach(element => {
@@ -263,6 +264,20 @@ function runWave(waveNum){
 
         document.body.addEventListener('keydown', keyListener);
 
+        document.getElementById("health").textContent =
+            `HEALTH: ${snakeHealth}`;
+
+        document.getElementById(
+            `enemyStrength`
+        ).textContent = `ENEMY STRENGTH: ${enemyStrength}`;
+
+        document.getElementById(
+            'headStrength'
+        ).textContent = `HEAD STRENGTH: ${snakeHeadStrength}`;
+
+        document.getElementById(
+            'tailStrength'
+        ).textContent = `TAIL STRENGTH: ${snakeTailStrength}`;
 
         // ========================
         // ENEMY INTERVAL
@@ -271,6 +286,7 @@ function runWave(waveNum){
         const enemyInterval = setInterval(() => {
             if(!gameStarted) return;
             // Remove old enemy position
+
             getBoxElement(
                 `box${getBoxNum(enemyX, enemyY)}`
             ).style.backgroundColor = 'rgb(46, 46, 46)';
@@ -328,6 +344,10 @@ function runWave(waveNum){
                                 removeFromSnake();
                             }
                             snakeHealth -= enemyStrength;
+
+                            document.getElementById("health").textContent =
+                                `HEALTH: ${snakeHealth}`;
+
                             if(snakeHealth <= 0){
                                 gameOver();
                             }

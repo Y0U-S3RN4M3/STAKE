@@ -10,15 +10,20 @@ const tailStrengthUpgradeButtonMax = document.getElementById("tailStrengthUpgrad
 const waveSkippingUpgradeButton = document.getElementById("waveSkippingUpgradeButton"); 
 const waveSkippingUpgradeButtonMax = document.getElementById("waveSkippingUpgradeButtonMax"); 
 
+const healthUpgradeButton = document.getElementById("healthUpgradeButton"); 
+const healthUpgradeButtonMax = document.getElementById("healthUpgradeButtonMax"); 
+
 const buySpeed = document.getElementById("buySpeed"); 
 const buyHeadStrength = document.getElementById("buyHeadStrength"); 
 const buyTailStrength = document.getElementById("buyTailStrength"); 
 const buyWaveSkip = document.getElementById("buyWaveSkip");
+const buyHealth = document.getElementById("buyHealth");
 
 const speedAmountDisplay = document.getElementById("speedAmount");
 const headStrengthAmountDisplay = document.getElementById("headStrengthAmount");
 const tailStrengthDisplay = document.getElementById("tailStrengthAmount");
 const waveSkippingDisplay = document.getElementById("waveSkippingAmount");
+const healthDisplay = document.getElementById("healthAmount");
 
 const pointLabel = document.getElementById("points");
 
@@ -26,14 +31,16 @@ const normalButtons = [
     speedUpgradeButton, 
     headStrengthUpgradeButton, 
     tailStrengthUpgradeButton, 
-    waveSkippingUpgradeButton 
+    waveSkippingUpgradeButton,
+    healthUpgradeButton
 ]; 
 
 const maxButtons = [ 
     speedUpgradeButtonMax, 
     headStrengthUpgradeButtonMax, 
     tailStrengthUpgradeButtonMax, 
-    waveSkippingUpgradeButtonMax 
+    waveSkippingUpgradeButtonMax,
+    healthUpgradeButtonMax,
 ]; 
 
 const allButtons = [normalButtons, maxButtons]; 
@@ -44,19 +51,24 @@ let stats = {
     headStrengthLVL: 1, 
     tailStrengthLVL: 1, 
     waveSkippingLVL: 1, 
+    healthLVL: 1,
 } 
  
 function saveStats(){ 
     localStorage.setItem("statsSave", JSON.stringify(stats)); 
 } 
  
-function loadStats(){ 
-    const savedStats = localStorage.getItem("statsSave"); 
- 
-    if(savedStats){ 
-        stats = JSON.parse(savedStats); 
-    } 
-} 
+function loadStats(){
+    const savedStats = localStorage.getItem("statsSave");
+
+    if(savedStats){
+        stats = JSON.parse(savedStats);
+
+        if(stats.healthLVL === undefined){
+            stats.healthLVL = 1;
+        }
+    }
+}
  
 function alert(message){ 
     const alertDiv = document.getElementById(`alertDiv`); 
@@ -159,7 +171,13 @@ function findPrice(element){
         case waveSkippingUpgradeButtonMax: 
             return (stats.waveSkippingLVL === 1 
                 ? 625 
-                : 5 ** ((stats.waveSkippingLVL * 2) + 2)); 
+                : 5 ** ((stats.waveSkippingLVL * 2) + 2));
+
+        case healthUpgradeButton:
+        case healthUpgradeButtonMax:
+            return stats.healthLVL === 1 
+                ? 25 
+                : Math.round((stats.healthLVL ** 5) * 1.25 / 5) * 5;
     } 
 } 
 
@@ -188,6 +206,12 @@ function findIfMax(element){
  
         case waveSkippingUpgradeButtonMax: 
             return true; 
+
+        case healthUpgradeButton:
+            return false;
+
+        case healthUpgradeButtonMax:
+            return true;
     } 
 } 
 
@@ -257,6 +281,19 @@ async function upgradeStat(buttonElement, max) {
             while (stats.points >= price) { 
                 stats.points -= price; 
                 stats.waveSkippingLVL++; 
+                price = findPrice(buttonElement); 
+            } 
+            break; 
+
+        case healthUpgradeButton: 
+            stats.points -= price; 
+            stats.healthLVL++; 
+            break; 
+
+        case healthUpgradeButtonMax: 
+            while (stats.points >= price) { 
+                stats.points -= price; 
+                stats.healthLVL++; 
                 price = findPrice(buttonElement); 
             } 
             break; 
@@ -351,8 +388,8 @@ function convertLVLtoDescription(type, num){
                 case 17: return 'Absolute'; 
                 case 18: return 'Eternal'; 
                 case 19: return 'INFINITE'; 
-                case 20: return 'IMMORTAL'; 
-                default: return 'IMMORTAL'; 
+                case 20: return 'INSANITY'; 
+                default: return 'INSANITY'; 
             }
 
         case 'waveSkipping': 
@@ -365,6 +402,31 @@ function convertLVLtoDescription(type, num){
                 case 6: return 'S'; 
                 default: return 'S++'; 
             }
+
+        case 'health': 
+            switch(num){ 
+                case 1: return 'zzz...'; 
+                case 2: return 'Insecure.'; 
+                case 3: return 'Averagely secure.'; 
+                case 4: return 'Secure'; 
+                case 5: return 'Burdeningly secure.'; 
+                case 6: return 'Reinforced'; 
+                case 7: return 'Too much armour'; 
+                case 8: return 'Diagnosed with tungsten.'; 
+                case 9: return 'This is too heavy'; 
+                case 10: return 'Overly fortified.'; 
+                case 11: return 'Strange orange boxes.'; 
+                case 12: return 'Tungsten'; 
+                case 13: return 'Undefinedanium'; 
+                case 14: return `Destructible? What's that?`; 
+                case 15: return 'Unbreakable'; 
+                case 16: return 'Complete'; 
+                case 17: return 'Absolute'; 
+                case 18: return 'Eternal'; 
+                case 19: return 'INFINITE'; 
+                case 20: return 'IMMORTAL'; 
+                default: return 'IMMORTAL'; 
+            }
     }
 }
  
@@ -375,11 +437,15 @@ function updateUI(){
     buyHeadStrength.textContent = `Head Strength: ${convertLVLtoDescription('headStrength', stats.headStrengthLVL)} (LVL ${stats.headStrengthLVL})`; 
     buyTailStrength.textContent = `Tail Strength: ${convertLVLtoDescription('tailStrength', stats.tailStrengthLVL)} (LVL ${stats.tailStrengthLVL})`; 
     buyWaveSkip.textContent = `Knowledge: ${convertLVLtoDescription('waveSkipping', stats.waveSkippingLVL)} (LVL ${stats.waveSkippingLVL})`;
+    buyHealth.textContent = `Health: ${convertLVLtoDescription('health', stats.healthLVL)} (LVL ${stats.healthLVL})`;
+
 
     speedAmountDisplay.textContent = `${findPrice(speedUpgradeButton)} Boxes`
     headStrengthAmountDisplay.textContent = `${findPrice(headStrengthUpgradeButton)} Boxes`
     tailStrengthDisplay.textContent = `${findPrice(tailStrengthUpgradeButton)} Boxes`
     waveSkippingDisplay.textContent = `${findPrice(waveSkippingUpgradeButton)} Boxes`
+    healthDisplay.textContent = `${findPrice(healthUpgradeButton)} Boxes`
+
 } 
  
 function init(){ 
