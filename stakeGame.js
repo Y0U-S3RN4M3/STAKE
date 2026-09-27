@@ -34,16 +34,18 @@ async function runWave(waveNum){
     return new Promise(resolve => {
         const counntdown = document.createElement("div");
         counntdown.id = "countdown";
-        counntdown.innerHTML = `<p>3</p>`;
+
+        counntdown.innerHTML = `
+            <p id='countdown'>WAVE ${waveNum}!</p>
+        `;
+
         document.body.appendChild(counntdown);
 
-        let countdown = 3;
+        let countdown = 4;
 
         setTimeout(() => {
-            document.getElementById("countdown").innerHTML = `
-                    <p>WAVE ${waveNum} IS STARTING!</p>
-                `;
-        }, 2000);
+            document.getElementById("countdown").innerHTML = `<p>3</p>`;
+        }, 1000);
 
         const countdownInterval = setInterval(() => {
 

@@ -489,3 +489,7 @@ button:hover::after {
     font-weight: bold;
     font-size: 1.125em;
 }
+#countdown{
+    width: 100vw;
+    text-align: center;
+}
