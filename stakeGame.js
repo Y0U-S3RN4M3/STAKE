@@ -30,7 +30,7 @@ const headColour = 'rgb(0, 75, 0)';
 const tailColour = 'rgb(0, 150, 0)';
 const enemyColour = 'rgb(255, 0, 0)';
 
-function runWave(waveNum){
+async function runWave(waveNum){
     return new Promise(resolve => {
         const counntdown = document.createElement("div");
         counntdown.id = "countdown";
@@ -38,6 +38,12 @@ function runWave(waveNum){
         document.body.appendChild(counntdown);
 
         let countdown = 3;
+
+        setTimeout(() => {
+            document.getElementById("countdown").innerHTML = `
+                    <p>WAVE ${waveNum} IS STARTING!</p>
+                `;
+        }, 2000);
 
         const countdownInterval = setInterval(() => {
 
@@ -137,7 +143,7 @@ function runWave(waveNum){
             document.getElementById('health').textContent = `HEALTH: ${snakeHealth}`;
             document.getElementById("length").textContent = `LENGTH: ${snakeLength}`;
         }
-        let snakeHealth = 10 + (10 * stats.healthLVL);
+        let snakeHealth = 15 + (5 * stats.healthLVL);
         function clearGrid(){
             const boxList = document.querySelectorAll('.box');
             boxList.forEach(element => {
