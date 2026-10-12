@@ -86,7 +86,7 @@ async function runWave(waveNum){
         const snakeHeadStrength = stats.headStrengthLVL;
         const snakeTailStrength = stats.tailStrengthLVL;
         const enemyIntSpeed = 270 - (waveNum * 10);
-        const snakeIntSpeed = 205 - ((stats.speedLVL - 1) * 10);
+        const snakeIntSpeed = 205 - ((stats.speedLVL - 1) * 6);
 
         const speedMultiplier =
             1 + ((stats.waveSkippingLVL - 1) / 4);
