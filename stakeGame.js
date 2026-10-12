@@ -528,7 +528,7 @@ async function runGame(){
                 points += 10;
             }
             else{
-                points += 5 ** wave;
+                points += 3 ** wave;
             }
 
             wave++;
