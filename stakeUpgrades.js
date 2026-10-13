@@ -451,6 +451,7 @@ function updateUI(){
 function init(){ 
     loadStats(); 
     updateUI();
+    localStorage.clear();
 }
  
 window.addEventListener("load", init);
